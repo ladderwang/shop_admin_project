@@ -16,3 +16,17 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+// 注册一个全局的导航守卫
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    next()
+    return
+  }
+  if (localStorage.getItem('token')) {
+    next()
+    return
+  } else {
+    router.push('/login')
+  }
+})

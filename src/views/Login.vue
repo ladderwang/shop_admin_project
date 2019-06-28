@@ -16,8 +16,8 @@
           <el-input v-model="loginForm.password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">登录</el-button>
-          <el-button>重置</el-button>
+          <el-button type="primary" @click="submitForm('loginForm')">登录</el-button>
+          <el-button @click="resetForm('loginForm')">重置</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -53,6 +54,30 @@ export default {
         ]
       }
     };
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          axios({
+            url: "http://localhost:8888/api/private/v1/login",
+            method: "post",
+            data: this.loginForm
+          }).then(({ data: { data, meta } }) => {
+            // console.log(data, meta);
+            if (meta.status === 200) {
+              localStorage.setItem("token", data.token);
+              this.$router.push("/home");
+            }
+          });
+        } else {
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    }
   }
 };
 </script>
