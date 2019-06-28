@@ -7,11 +7,12 @@
         :model="loginForm"
         label-width="80px"
         label-position="top"
+        :rules="rules"
       >
-        <el-form-item label="用户名">
+        <el-form-item label="用户名" prop="username">
           <el-input v-model="loginForm.username"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item label="密码" prop="password">
           <el-input v-model="loginForm.password"></el-input>
         </el-form-item>
         <el-form-item>
@@ -30,6 +31,26 @@ export default {
       loginForm: {
         username: "",
         password: ""
+      },
+      rules: {
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          {
+            min: 5,
+            max: 12,
+            message: "长度必须为5-12个字符",
+            trigger: "change"
+          }
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          {
+            min: 5,
+            max: 12,
+            message: "长度必须为5-12个字符",
+            trigger: "change"
+          }
+        ]
       }
     };
   }
