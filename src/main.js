@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import axios from 'axios'
 // 引入element ui插件
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -11,6 +12,18 @@ Vue.config.productionTip = false
 
 // vue使用了element ui
 Vue.use(ElementUI)
+
+// 配置axios请求的基路径
+axios.defaults.baseURL = 'http://localhost:8888/api/private/v1/'
+// 设置请求头的token
+
+axios.interceptors.request.use(function(config) {
+  config.headers.Authorization = localStorage.getItem('token')
+  return config
+})
+
+// 把axios添加到vue的原型上
+Vue.prototype.$http = axios
 
 new Vue({
   router,
