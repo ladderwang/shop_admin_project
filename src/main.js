@@ -17,8 +17,10 @@ Vue.use(ElementUI)
 axios.defaults.baseURL = 'http://localhost:8888/api/private/v1/'
 // 设置请求头的token
 
-axios.interceptors.request.use(function(config) {
+axios.interceptors.request.use(config => {
+  // 统一添加 Authorization 请求头
   config.headers.Authorization = localStorage.getItem('token')
+  // 一定要返回 config
   return config
 })
 
