@@ -10,7 +10,7 @@
         </el-col>
         <el-col :span="6">
           <span>欢迎上海前端39期星曜会员</span>
-          <a href="javaScript:;">退出</a>
+          <a href="#" @click="loginout">退出</a>
         </el-col>
       </el-row>
     </el-header>
@@ -122,3 +122,16 @@
   height: 100%;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    loginout() {
+      console.log(11);
+      // localStorage.setItem("token", "");
+      // this.$router.push("/login");
+    }
+  }
+};
+</script>
+
