@@ -127,9 +127,8 @@
 export default {
   methods: {
     loginout() {
-      console.log(11);
-      // localStorage.setItem("token", "");
-      // this.$router.push("/login");
+      localStorage.setItem("token", "");
+      this.$router.push("/login");
     }
   }
 };

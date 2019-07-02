@@ -64,6 +64,7 @@ export default {
             data: this.loginForm
           });
           if (res.data.meta.status === 200) {
+            localStorage.setItem("token", res.data.data.token);
             this.$router.push("/home");
           }
         } else {
